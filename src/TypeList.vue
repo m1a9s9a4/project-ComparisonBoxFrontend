@@ -29,7 +29,7 @@ export default {
     methods: {
         getType() {
             axios
-            .get(process.env.API_URL + "/api/v1/player_type/" + this.$route.params["tid"])
+            .get(process.env.VUE_APP_API_URL + "/api/v1/player_type/" + this.$route.params["tid"])
             .then(res => {
                 console.log(res.data);
                 this.title = res.data.japanese;
@@ -41,7 +41,7 @@ export default {
         },
         getPlayerByTypeId() {
             axios
-            .get(process.env.API_URL + "/api/v1/players/type/" + this.$route.params["tid"])
+            .get(process.env.VUE_APP_API_URL + "/api/v1/players/type/" + this.$route.params["tid"])
             .then(res => {
                 console.log(res);
                 this.players = res.data;

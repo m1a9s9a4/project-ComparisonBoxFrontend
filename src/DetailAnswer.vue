@@ -99,7 +99,7 @@ export default {
   methods: {
 		_getPlayerByEnglish: function (eng, target) {
 			Axios
-				.get(process.env.API_URL + "/api/v1/player/english/"+eng)
+				.get(process.env.VUE_APP_API_URL + "/api/v1/player/english/"+eng)
 				.then(res => {
 					if (target == 'player') {
 						this.player = res.data;
@@ -118,7 +118,7 @@ export default {
 		},
     _getAnswersByQid: function (qid) {
 			Axios
-				.get(process.env.API_URL + "/api/v1/answer/battle/"+this.battleId+"/"+qid+"/count")
+				.get(process.env.VUE_APP_API_URL + "/api/v1/answer/battle/"+this.battleId+"/"+qid+"/count")
 				.then(res => {
 					if (res.data == null) return;
 
@@ -142,7 +142,7 @@ export default {
 		},
     getBattleId: function () {
       Axios
-        .get(process.env.API_URL + "/api/v1/battle/" +this.player.id+"/"+this.opponent.id)
+        .get(process.env.VUE_APP_API_URL + "/api/v1/battle/" +this.player.id+"/"+this.opponent.id)
         .then(res => {
 					this.battleId = res.data.id;
         })
@@ -157,7 +157,7 @@ export default {
 		},
 		getQuestions: function() {
 			Axios
-				.get(process.env.API_URL + "/api/v1/questions/type/"+this.player.type_id)
+				.get(process.env.VUE_APP_API_URL + "/api/v1/questions/type/"+this.player.type_id)
 				.then(res => {
 					this.questions = res.data;
 				})
