@@ -45,7 +45,7 @@ export default {
   methods: {
 		getPlayerByEnglish: function () {
 			Axios
-				.get("/api/v1/player/english/"+this.english)
+				.get(process.env.API_URL + "/api/v1/player/english/"+this.english)
 				.then(res => {
 					this.player = res.data;
 				})
@@ -58,7 +58,7 @@ export default {
 		},
     getBattledPlayers: function () {
 			Axios
-				.get("/api/v1/battle/player/"+this.player.id)
+				.get(process.env.API_URL + "/api/v1/battle/player/"+this.player.id)
 				.then(res => {
 					this.battles = this._filterPlayers(res.data);
 				})
@@ -68,7 +68,7 @@ export default {
 		},
 		firstPlayerById: function(id) {
 			Axios
-				.get("/api/v1/player/"+id)
+				.get(process.env.API_URL + "/api/v1/player/"+id)
 				.then(res => {
 					this.players.push(res.data);
 				});

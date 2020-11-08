@@ -87,7 +87,7 @@ export default {
   methods: {
     getBattleId: function () {
       Axios
-        .get("/api/v1/battle/" +this.player1.id+"/"+this.player2.id)
+        .get(process.env.API_URL + "/api/v1/battle/" +this.player1.id+"/"+this.player2.id)
         .then(res => {
           this.battleId = res.data.id;
         })
@@ -100,7 +100,7 @@ export default {
     },
     getQuestion: function () {
       Axios
-        .get("/api/v1/questions/type/"+this.player1.type_id)
+        .get(process.env.API_URL + "/api/v1/questions/type/"+this.player1.type_id)
         .then(res => {
           this.questions = res.data;
           this.numberOfQuestions = this.questions.length;
@@ -114,7 +114,7 @@ export default {
     },
     getPlayer: function (english) {
       Axios
-      .get("/api/v1/player/english/" + english)
+      .get(process.env.API_URL + "/api/v1/player/english/" + english)
       .then(res => {
         if (this.player1.length < 1) {
           this.player1 = res.data;
@@ -136,7 +136,7 @@ export default {
           battle_id: this.battleId,
       };
       Axios
-        .post("/api/v1/answer", params, {
+        .post(process.env.API_URL + "/api/v1/answer", params, {
           headers: {
             'Content-Type': 'application/json',
           }
@@ -153,7 +153,7 @@ export default {
     },
     _checkAnsweredQuestions: function() {
       Axios
-        .get("/api/v1/answer/users", {
+        .get(process.env.API_URL + "/api/v1/answer/users", {
           params: {
             uid: this.uid,
             bid: this.battleId,
@@ -193,7 +193,7 @@ export default {
         uid: this.uid,
       };
       Axios
-        .post("/api/v1/answer/user", params, {
+        .post(process.env.API_URL + "/api/v1/answer/user", params, {
           headers: {
             'Content-Type': 'application/json',
           }

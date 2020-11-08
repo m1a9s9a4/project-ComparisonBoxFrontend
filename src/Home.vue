@@ -38,7 +38,7 @@ export default {
     methods: {
         getType() {
             axios
-            .get("/api/v1/player_type/1")
+            .get(process.env.API_URL + "/api/v1/player_type/1")
             .then(res => {
                 this.title = res.data.japanese;
                 this.playerType = res.data;
@@ -49,7 +49,7 @@ export default {
         },
         getPlayerByTypeId() {
             axios
-            .get("/api/v1/players/type/1")
+            .get(process.env.API_URL + "/api/v1/players/type/1")
             .then(res => {
                 this.players = res.data;
             })
