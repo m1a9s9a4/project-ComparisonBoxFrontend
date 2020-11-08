@@ -2,6 +2,7 @@ import Vue from 'vue'
 import router from './router';
 import vuetify from './plugins/vuetify';
 import App from './App.vue';
+require('dotenv').config();
 
 Vue.config.productionTip = false;
 
