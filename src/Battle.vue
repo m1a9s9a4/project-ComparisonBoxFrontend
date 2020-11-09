@@ -80,7 +80,7 @@ export default {
       return this.currentNumber - 1;
     },
     questionFinished: function () {
-      return this.numberOfQuestions <= this.currentNumber;
+      return this.numberOfQuestions < this.currentNumber;
     },
   },
 
