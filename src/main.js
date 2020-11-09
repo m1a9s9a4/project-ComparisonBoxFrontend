@@ -2,9 +2,8 @@ import Vue from 'vue'
 import router from './router';
 import vuetify from './plugins/vuetify';
 import App from './App.vue';
+require('dotenv').config();
 
-console.log("process.env.VUE_APP_API_URL");
-console.log(process.env.VUE_APP_API_URL);
 Vue.config.productionTip = false;
 
 if (!localStorage.getItem('uid')) {
