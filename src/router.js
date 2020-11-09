@@ -5,6 +5,7 @@ import Battle from './Battle.vue';
 import Detail from './Detail.vue';
 import TypeList from './TypeList.vue';
 import DetailAnswer from './DetailAnswer.vue';
+import PageNotFound from './Error.vue';
 
 Vue.use(Router);
 
@@ -35,6 +36,11 @@ export default new Router({
             path: '/detail/:eng1/answers/:eng2/',
             name: 'DetailAnswer',
             component: DetailAnswer,
+        },
+        {
+            path: '*',
+            name: 'Error',
+            component: PageNotFound,
         }
     ]
 });
