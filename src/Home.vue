@@ -1,9 +1,17 @@
 <template>
     <v-main>
-        <h2 class="text-center">「VS（バーサス）」について</h2>
+        <h2 class="text-center">「COMBOX」について</h2>
         <p class="py-5">
             当サイトは同じ分野のもの同士を比較することで人気や一般的な考え方を知ることを目標として作成しています。<br>
-            より多くのデータが集まればより自分が知りたい結果が知れると思うのでぜひご自身でも回答して友人にもシェアしてください。
+            より多くのデータが集まればより自分が知りたい結果が知れると思うのでぜひご自身でも回答して友人にもシェアしてください！
+            <v-row>
+                <v-col cols="6">
+                    <Twitter title="COMBOXで言語のトレンドがわかります！" :url="siteUrl"/>
+                </v-col>
+                <v-col cols="6">
+                    <Facebook />
+                </v-col>
+            </v-row>
         </p>
         <template v-if="players.length > 0">
             <div v-for="(pt, i) in players" v-bind:key="i">
@@ -29,18 +37,23 @@
 <script>
 import Language from './components/Home/Language';
 import Loading from './components/Common/Loading';
+import Twitter from './components/Share/Twitter';
+import Facebook from './components/Share/Facebook';
 import axios from 'axios';
 
 export default {
     components: {
         Language,
         Loading,
+        Twitter,
+        Facebook,
     },
     data () {
         return {
             title: null,
             playerType: {},
             players: [],
+            siteUrl: '',
         }
     },
     methods: {
@@ -70,6 +83,7 @@ export default {
     },
     mounted: function () {
         this.getType();
+        this.siteUrl = process.env.VUE_APP_URL;
     },
 }
 </script>

@@ -6,7 +6,7 @@
     >
       <div class="d-flex align-center">
         <v-img
-          alt="VS logo"
+          alt="COMBOX logo"
           class="shrink mr-2"
           contain
           src="../assets/logo_transparent.png"
@@ -17,7 +17,7 @@
       
       <v-spacer></v-spacer>
 
-      <v-toolbar-title>VS</v-toolbar-title>
+      <v-toolbar-title>COMBOX</v-toolbar-title>
 
       <v-spacer></v-spacer>
 

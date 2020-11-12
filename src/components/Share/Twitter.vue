@@ -23,7 +23,7 @@ export default {
     methods: {
         twitterShare() {
             //シェアする画面を設定
-            const shareURL = this.baseUrl+'?text='+this.title+"%0a最強言語決定戦！！%0a%20%23languagetournament"+'&url='+this.url;  
+            const shareURL = this.baseUrl+'?text='+this.title+"%0a最強言語決定戦！！%0a%20%23combox"+'&url='+this.url;  
            //シェア用の画面へ移行
             location.href = shareURL 
         },
