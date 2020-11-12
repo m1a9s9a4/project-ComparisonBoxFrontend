@@ -1,16 +1,19 @@
 <template>
     <v-main>
-        <h2>{{ title }}一覧</h2>
         <template v-if="players.length > 0">
-            <v-row>
-                <v-col md="3" cols="6" v-for="(p, i) in players" v-bind:key="i">
-                    <Language 
-                        :name=p.japanese
-                        :english=p.english
-                        :imgsrc=p.img
-                    />
-                </v-col>
-            </v-row>
+            <div v-for="(pt, i) in players" v-bind:key="i">
+                <h2 class="text-center text-bold">{{ pt.name }}</h2>
+                <v-row>
+                    <v-col md="3" cols="6" v-for="(p2, i2) in pt.data" v-bind:key="i2">
+                        <Language 
+                            :name=p2.japanese
+                            :english=p2.english
+                            :imgsrc=p2.img
+                        />
+                    </v-col>
+                </v-row>
+                <v-divider v-if="i < players.length - 1" class="my-10"></v-divider>
+            </div>
         </template>
         <template v-else>
             <Loading />
@@ -32,26 +35,28 @@ export default {
         return {
             title: null,
             playerType: {},
-            players: [{}],
+            players: [],
         }
     },
     methods: {
         getType() {
             axios
-            .get(process.env.VUE_APP_API_URL + "/api/v1/player_type/1")
+            .get(process.env.VUE_APP_API_URL + "/api/v1/player_types")
             .then(res => {
-                this.title = res.data.japanese;
+                res.data.map((d) => {
+                    this._getPlayerByTypeId(d);
+                })
                 this.playerType = res.data;
             })
             .catch(e => {
                 console.error(e);
             })
         },
-        getPlayerByTypeId() {
+        _getPlayerByTypeId(type) {
             axios
-            .get(process.env.VUE_APP_API_URL + "/api/v1/players/type/1")
+            .get(process.env.VUE_APP_API_URL + "/api/v1/players/type/"+type.id)
             .then(res => {
-                this.players = res.data;
+                this.players.push({name: type.japanese, data: res.data});
             })
             .catch(e => {
                 console.error(e);
@@ -60,7 +65,6 @@ export default {
     },
     mounted: function () {
         this.getType();
-        this.getPlayerByTypeId();
     },
 }
 </script>

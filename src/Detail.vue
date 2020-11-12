@@ -2,23 +2,28 @@
   <v-main>
     <h3>「{{ player.japanese }}」はこれらと比較されています...</h3>
     <v-row>
-			<template v-if="players.length > 0">
-				<v-col cols="12" md="3" v-for="(p, i) in players" v-bind:key="i">
-					<Language :name="p.japanese" :imgsrc="p.img" :link="'/'+player.english+'/vs/'+p.english" />
-					<v-row>
-						<v-col>
-							<v-btn block color="primary" :href="'/'+player.english+'/vs/'+p.english+'/'">回答はこちら</v-btn>
-						</v-col>
-						<v-col>
-							<v-btn block color="info" :href="'/detail/'+player.english+'/answers/'+p.english+'/'">結果はこちら</v-btn>
-						</v-col>
-					</v-row>
-				</v-col>
-			</template>
-			<template v-else>
-				<Loading />
-			</template>
+		<template v-if="players.length > 0">
+			<v-col cols="6" md="3" v-for="(p, i) in players" v-bind:key="i">
+				<Language :name="p.japanese" :imgsrc="p.img" :link="'/'+player.english+'/vs/'+p.english" />
+				<v-row>
+					<v-col>
+						<v-btn block color="primary" :href="'/'+player.english+'/vs/'+p.english+'/'">回答はこちら</v-btn>
+					</v-col>
+					<v-col>
+						<v-btn block color="info" :href="'/detail/'+player.english+'/answers/'+p.english+'/'">結果はこちら</v-btn>
+					</v-col>
+				</v-row>
+			</v-col>
+		</template>
+		<template v-else>
+			<Loading />
+		</template>
     </v-row>
+	<v-row>
+		<v-col>
+			<v-btn block color="primary" outlined href="/">トップに戻る</v-btn>
+		</v-col>
+	</v-row>
   </v-main>
 </template>
 
