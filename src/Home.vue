@@ -1,5 +1,10 @@
 <template>
     <v-main>
+        <h2 class="text-center">「VS（バーサス）」について</h2>
+        <p class="py-5">
+            当サイトは同じ分野のもの同士を比較することで人気や一般的な考え方を知ることを目標として作成しています。<br>
+            より多くのデータが集まればより自分が知りたい結果が知れると思うのでぜひご自身でも回答して友人にもシェアしてください。
+        </p>
         <template v-if="players.length > 0">
             <div v-for="(pt, i) in players" v-bind:key="i">
                 <h2 class="text-center text-bold">{{ pt.name }}</h2>
