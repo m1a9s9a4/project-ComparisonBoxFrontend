@@ -6,7 +6,7 @@
             より多くのデータが集まればより自分が知りたい結果が知れると思うのでぜひご自身でも回答して友人にもシェアしてください！
             <v-row>
                 <v-col>
-                    <Twitter title="COMBOXで言語のトレンドがわかります！" :url="siteUrl"/>
+                    <Twitter title="COMBOXで言語のトレンドがわかります！" text="友達の回答も集めましょう！" :url="siteUrl"/>
                 </v-col>
             </v-row>
         </p>
