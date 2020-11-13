@@ -5,11 +5,8 @@
             当サイトは同じ分野のもの同士を比較することで人気や一般的な考え方を知ることを目標として作成しています。<br>
             より多くのデータが集まればより自分が知りたい結果が知れると思うのでぜひご自身でも回答して友人にもシェアしてください！
             <v-row>
-                <v-col cols="6">
+                <v-col>
                     <Twitter title="COMBOXで言語のトレンドがわかります！" :url="siteUrl"/>
-                </v-col>
-                <v-col cols="6">
-                    <Facebook />
                 </v-col>
             </v-row>
         </p>
@@ -38,7 +35,6 @@
 import Language from './components/Home/Language';
 import Loading from './components/Common/Loading';
 import Twitter from './components/Share/Twitter';
-import Facebook from './components/Share/Facebook';
 import axios from 'axios';
 
 export default {
@@ -46,7 +42,6 @@ export default {
         Language,
         Loading,
         Twitter,
-        Facebook,
     },
     data () {
         return {

@@ -13,11 +13,8 @@
 				</v-col>
 			</v-row>
 			<v-row>
-				<v-col cols="6">
+				<v-col>
 					<Twitter :title="player.english+' vs '+opponent.english" :url="questionUrl" text="回答を求める" />
-				</v-col>
-				<v-col cols="6">
-					<Facebook :title="player.english+' vs '+opponent.english" :url="questionUrl" />
 				</v-col>
 			</v-row>
 			<template >
@@ -68,7 +65,6 @@
 <script>
 import Axios from "axios";
 import Twitter from './components/Share/Twitter';
-import Facebook from './components/Share/Facebook';
 import Loading from './components/Common/Loading';
 
 export default {
@@ -82,7 +78,6 @@ export default {
 	}),
 	components: {
 		Twitter,
-		Facebook,
 		Loading,
 	},
 	computed: {
