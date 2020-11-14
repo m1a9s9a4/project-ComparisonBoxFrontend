@@ -1,5 +1,5 @@
 <template>
-    <v-btn block @click="twitterShare" color="info"><v-icon>mdi-twitter</v-icon> {{ text }}</v-btn>
+    <v-btn block @click="twitterShare" color="info" target="_blank"><v-icon>mdi-twitter</v-icon> {{ text }}</v-btn>
 </template>
 <script>
 export default {
@@ -22,10 +22,10 @@ export default {
     },
     methods: {
         twitterShare() {
-            //シェアする画面を設定
-            const shareURL = this.baseUrl+'?text='+this.title+"%0a最強言語決定戦！！%0a%20%23combox"+'&url='+this.url;  
-           //シェア用の画面へ移行
-            location.href = shareURL 
+           window.open(this._createShareUrl(), '_blank');
+        },
+        _createShareUrl() {
+            return this.baseUrl+'?text='+this.title+"%0a言語別、フレームワーク別で知りたかった「どれが書きやすい？」「個人開発に向いてるのは？」アンケート結果公開中！！%0a%20%23combox%0a"+'&url='+this.url;
         },
     }
 }
