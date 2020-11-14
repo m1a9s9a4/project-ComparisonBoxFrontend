@@ -14,6 +14,7 @@ if (!localStorage.getItem('uid')) {
 
 Vue.use(VueAnalytics, {
   id: process.env.VUE_APP_GA_ID,
+  router,
 });
 
 new Vue({
