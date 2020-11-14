@@ -1,7 +1,7 @@
 <template>
     <v-main>
         <template>
-            <v-img src="./assets/logo.png"></v-img>
+            <v-img src="./assets/logo.png" max-height="600px" contain></v-img>
             <h2 class="text-center">「COMBOX」とは</h2>
             <p class="py-5">
                 COMBOXとは、同じ分野のもの同士を比較することで人気や他の人の考え方の傾向を知ることで新しいアイディアのきっかけや一歩を踏み出せるようになることを目標として作られたサービスです。
@@ -41,7 +41,7 @@
         <template v-if="players.length > 0">
             <h2 class="text-center">回答受付中の分野</h2>
             <p class="py-5">
-                現在 <span class="">{{players.length}}</span> 個の分野の回答を受付中です！まだ回答受付してない分野も随時追加予定ですので、ぜひその際はアンケートにご協力お願いします！
+                現在 {{players.length}} 個の分野の回答を受付中です！まだ回答受付してない分野も随時追加予定ですので、ぜひその際はアンケートにご協力お願いします！
                 <v-row>
                     <v-col cols="12" md="6" v-for="(type, i) in players" v-bind:key="i">
                         <v-btn block color="primary" :href="'/type/'+type.id">{{type.name}}({{type.data.length}})</v-btn>
