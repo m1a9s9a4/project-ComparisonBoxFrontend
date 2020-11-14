@@ -1,6 +1,6 @@
 <template>
     <v-card class="mx-auto" max-width="300" elevation="10" @click="selectedPlayer">
-        <v-img contain :alt="name" height="200" :src="imgsrc"></v-img>
+        <v-img contain :alt="name" height="200" :src="src"></v-img>
     </v-card>
 </template>
 
@@ -16,10 +16,19 @@ export default {
     },
     imgsrc: {
       type: String,
-      default: "https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png",
+      default: "",
     },
   },
+  data: () => ({
+    src: '',
+  }),
+  mounted() {
+    this._requireSrc();
+  },
   methods: {
+    _requireSrc() {
+      this.src = require('./../../assets/players/'+this.imgsrc);
+    },
     selectedPlayer() {
       this.$emit('selected-id', this.id);
     }
