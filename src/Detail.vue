@@ -1,6 +1,6 @@
 <template>
   <v-main>
-    <h3>「{{ player.japanese }}」はこれらと比較されています...</h3>
+    <h2 class="text-center">「{{ player.japanese }}」と比較する<br />対象を選びましょう</h2>
     <v-row>
 		<template v-if="players.length > 0">
 			<v-col cols="6" md="3" v-for="(p, i) in players" v-bind:key="i">
@@ -19,11 +19,6 @@
 			<Loading />
 		</template>
     </v-row>
-	<v-row>
-		<v-col>
-			<v-btn block color="primary" outlined href="/">トップに戻る</v-btn>
-		</v-col>
-	</v-row>
   </v-main>
 </template>
 
@@ -65,6 +60,7 @@ export default {
 			Axios
 				.get(process.env.VUE_APP_API_URL + "/api/v1/battle/player/"+this.player.id)
 				.then(res => {
+					// battleがなかったときに他の候補を表示する処理を追加
 					this.battles = this._filterPlayers(res.data);
 				})
 				.finally(() => {
