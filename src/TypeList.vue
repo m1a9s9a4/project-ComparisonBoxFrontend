@@ -1,7 +1,8 @@
 <template>
     <v-main>
+        <h2 v-if="playerType" class="text-center">{{playerType.japanese}}</h2>
+        <p class="text-center subtitle">アンケートに回答したいもしくは結果をみたい{{playerType.japanese}}を一つタップしましょう。</p>
         <template v-if="players.length > 0">
-            <h2 class="text-center">{{playerType.japanese}}</h2>
             <v-row>
                 <v-col md="3" cols="6" v-for="(p, i) in players" :key="i">
                     <Language 

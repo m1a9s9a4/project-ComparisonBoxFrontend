@@ -1,6 +1,6 @@
 <template>
   <v-main>
-    <h2 class="text-center">「{{ player.japanese }}」と比較する<br />対象を選びましょう</h2>
+    <h2 v-if="player.japanese" class="text-center">「{{ player.japanese }}」と比較する<br />対象を選びましょう</h2>
     <v-row>
 		<template v-if="players.length > 0">
 			<v-col cols="6" md="3" v-for="(p, i) in players" v-bind:key="i">
