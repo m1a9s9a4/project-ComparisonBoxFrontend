@@ -1,38 +1,43 @@
 <template>
     <v-main v-cloak>
-      <template v-if="questionFinished">
-        <Complete :src1="player1.img" :src2="player2.img" :english1="english1" :english2="english2" />
+      <template v-if="requestedQuestions">
+        <template v-if="questionFinished">
+          <Complete :src1="player1.img" :src2="player2.img" :english1="english1" :english2="english2" />
+        </template>
+        <template v-else>
+          <Question v-if="currentQuestion && player1 && player2" :question="currentQuestion" :current="currentNumber" :total="numberOfQuestions" />
+          <v-row class="align-center">
+            <template v-if="isAlreadyAnswered">
+              <p>すでに回答済みの質問です。</p>
+            </template>
+            <template v-else>
+              <v-col md="5" cols="12">
+                <Language 
+                  :id="player1.id"
+                  :name="player1.english"
+                  :imgsrc="player1.img"
+                  @selected-id="saveAnswer"
+                />
+              </v-col>
+              <v-col class="display-3" md="2" cols="12">
+                <div class="text-center">
+                  or
+                </div>
+              </v-col>
+              <v-col md="5" cols="12">
+                <Language
+                  :id="player2.id"
+                  :name="player2.english"
+                  :imgsrc="player2.img"
+                  @selected-id="saveAnswer"
+                />
+              </v-col>
+            </template>
+          </v-row>
+        </template>
       </template>
       <template v-else>
-        <Question v-if="currentQuestion" :question="currentQuestion" :current="currentNumber" :total="numberOfQuestions" />
-        <v-row class="align-center">
-          <template v-if="isAlreadyAnswered">
-            <p>すでに回答済みの質問です。</p>
-          </template>
-          <template v-else>
-            <v-col md="5" cols="12">
-              <Language 
-                :id="player1.id"
-                :name="player1.english"
-                :imgsrc="player1.img"
-                @selected-id="saveAnswer"
-              />
-            </v-col>
-            <v-col class="display-3" md="2" cols="12">
-              <div class="text-center">
-                or
-              </div>
-            </v-col>
-            <v-col md="5" cols="12">
-              <Language
-                :id="player2.id"
-                :name="player2.english"
-                :imgsrc="player2.img"
-                @selected-id="saveAnswer"
-              />
-            </v-col>
-          </template>
-        </v-row>
+        <Loading />
       </template>
     </v-main>
 </template>
@@ -41,6 +46,7 @@
 import Question from './components/Battle/Question';
 import Language from './components/Battle/Language';
 import Complete from './components/Battle/Complete';
+import Loading from './components/Common/Loading';
 import Axios from 'axios';
 
 export default {
@@ -50,6 +56,7 @@ export default {
     Question,
     Language,
     Complete,
+    Loading,
   },
 
   data: () => ({
@@ -64,6 +71,7 @@ export default {
     uid: null,
     isAlreadyAnswered: false,
     numberOfQuestions: 0,
+    requestedQuestions: false,
   }),
 
 
@@ -104,6 +112,7 @@ export default {
         .then(res => {
           this.questions = res.data;
           this.numberOfQuestions = this.questions.length;
+          this.requestedQuestions = true;
         })
         .catch(e => {
           console.error(e);

@@ -4,8 +4,8 @@
 			<h3 class="text-center">{{ player.japanese }} vs {{opponent.japanese}} アンケート結果</h3>
 			<p class="text-center">※バー中央の%が<strong>{{player.japanese}}</strong>を選んだ割合です。</p>
 			<v-row>
-				<v-col cols="6"><v-img :src="player.img"></v-img></v-col>
-				<v-col cols="6"><v-img :src="opponent.img"></v-img></v-col>
+				<v-col cols="6"><v-img contain :src="requireSrc(player.img)"></v-img></v-col>
+				<v-col cols="6"><v-img contain :src="requireSrc(opponent.img)"></v-img></v-col>
 			</v-row>
 			<v-row>
 				<v-col>
@@ -161,6 +161,12 @@ export default {
 						this._getAnswersByQid(q.id);
 					})
 				})
+		},
+		requireSrc: function(src) {
+			if (src) {
+				return require('./assets/players/'+src);
+			}
+			return '';
 		}
 	},
 };
