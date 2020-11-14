@@ -17,8 +17,5 @@ export default {
         Header,
         Footer,
     },
-    mounted() {
-        this.$ga.page(this.$route.path);
-    }
 };
 </script>
