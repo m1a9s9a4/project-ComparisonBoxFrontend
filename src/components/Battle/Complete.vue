@@ -4,10 +4,10 @@
         <p class="subtitle-1">ご協力ありがとうございました！</p>
         <v-row>
             <v-col cols="6">
-                <v-img :src="src1"></v-img>
+                <v-img :src="requireSrc(src1)"></v-img>
             </v-col>
             <v-col cols="6">
-                <v-img :src="src2"></v-img>
+                <v-img :src="requireSrc(src2)"></v-img>
             </v-col>
         </v-row>
         <v-row>
@@ -35,6 +35,11 @@ export default {
         },
         english2: {
             type: String,
+        }
+    },
+    methods: {
+        requireSrc(src) {
+            return require('./../../assets/players/'+src);
         }
     }
 }
