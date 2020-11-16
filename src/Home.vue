@@ -38,13 +38,13 @@
                 img="how_to_use_4.png"
             />
         </template>
-        <template v-if="players.length > 0">
+        <template v-if="playerTypes.length > 0">
             <h2 class="text-center">回答受付中の分野</h2>
             <p class="py-5">
-                現在 {{players.length}} 個の分野の回答を受付中です！まだ回答受付してない分野も随時追加予定ですので、ぜひその際はアンケートにご協力お願いします！
+                現在 {{playerTypes.length}} 個の分野の回答を受付中です！まだ回答受付してない分野も随時追加予定ですので、ぜひその際はアンケートにご協力お願いします！
                 <v-row>
-                    <v-col cols="12" md="6" v-for="(type, i) in players" v-bind:key="i">
-                        <v-btn block color="primary" :href="'/type/'+type.id">{{type.name}}({{type.data.length}})</v-btn>
+                    <v-col cols="12" md="6" v-for="(type, i) in playerTypes" v-bind:key="i">
+                        <v-btn block color="primary" :href="'/type/'+type.id">{{type.japanese}}({{type.Players.length}})</v-btn>
                     </v-col>
                 </v-row>
             </p>
@@ -65,20 +65,18 @@
                     </v-col>
                 </v-row>
             </p>
-        </template>
-        <template v-if="players.length > 0">
-            <div v-for="(pt, i) in players" v-bind:key="i">
-                <h2 class="text-center text-bold">{{ pt.name }}</h2>
+            <div v-for="(playerType, i) in playerTypes" v-bind:key="i">
+                <h2 class="text-center text-bold">{{ playerType.japanese }}</h2>
                 <v-row>
-                    <v-col md="3" cols="6" v-for="(p2, i2) in pt.data" v-bind:key="i2">
+                    <v-col md="3" cols="6" v-for="(player, i2) in playerType.Players" v-bind:key="i2">
                         <Language 
-                            :name=p2.japanese
-                            :english=p2.english
-                            :imgsrc=p2.img
+                            :name=player.japanese
+                            :english=player.english
+                            :imgsrc=player.img
                         />
                     </v-col>
                 </v-row>
-                <v-divider v-if="i < players.length - 1" class="my-10"></v-divider>
+                <v-divider v-if="i < playerTypes.length - 1" class="my-10"></v-divider>
             </div>
         </template>
         <template v-else>
@@ -103,39 +101,21 @@ export default {
     },
     data () {
         return {
-            title: null,
             playerTypes: {},
-            players: [],
             siteUrl: '',
         }
     },
     methods: {
-        getType() {
+        getTypeWithPlayers() {
             axios
-            .get(process.env.VUE_APP_API_URL + "/api/v1/player_types")
-            .then(res => {
-                res.data.map((d) => {
-                    this._getPlayerByTypeId(d);
-                })
-                this.playerTypes = res.data;
-            })
-            .catch(e => {
-                console.error(e);
-            })
+                .get(process.env.VUE_APP_API_URL + '/api/v1/player_type/players')
+                .then(res => {
+                    this.playerTypes = res.data;
+                });
         },
-        _getPlayerByTypeId(type) {
-            axios
-            .get(process.env.VUE_APP_API_URL + "/api/v1/players/type/"+type.id)
-            .then(res => {
-                this.players.push({id: type.id, name: type.japanese, data: res.data});
-            })
-            .catch(e => {
-                console.error(e);
-            });
-        }
     },
     mounted: function () {
-        this.getType();
+        this.getTypeWithPlayers();
         this.siteUrl = process.env.VUE_APP_URL;
     },
 }

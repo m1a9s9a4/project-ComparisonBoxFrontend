@@ -2,13 +2,13 @@
     <v-main>
         <h2 v-if="playerType" class="text-center">{{playerType.japanese}}</h2>
         <p class="text-center subtitle">アンケートに回答したいもしくは結果をみたい{{playerType.japanese}}を一つタップしましょう。</p>
-        <template v-if="players.length > 0">
+        <template v-if="playerType.Players.length > 0">
             <v-row>
-                <v-col md="3" cols="6" v-for="(p, i) in players" :key="i">
+                <v-col md="3" cols="6" v-for="(player, i) in playerType.Players" :key="i">
                     <Language 
-                        :name=p.japanese
-                        :english=p.english
-                        :imgsrc=p.img
+                        :name=player.japanese
+                        :english=player.english
+                        :imgsrc=player.img
                     />
                 </v-col>
             </v-row>
@@ -31,37 +31,21 @@ export default {
     },
     data () {
         return {
-            title: null,
             playerType: {},
-            players: [],
             siteUrl: '',
         }
     },
     methods: {
-        _getTypeById(id) {
+        getTypeWithPlayers() {
             axios
-            .get(process.env.VUE_APP_API_URL + "/api/v1/player_type/"+id)
-            .then(res => {
-                this.playerType = res.data;
-            })
-            .catch(e => {
-                console.error(e);
-            })
+                .get(process.env.VUE_APP_API_URL + '/api/v1/player_type/' + this.$route.params["tid"])
+                .then(res => {
+                    this.playerType = res.data;
+                });
         },
-        _getPlayerByTypeId(id) {
-            axios
-            .get(process.env.VUE_APP_API_URL + "/api/v1/players/type/"+id)
-            .then(res => {
-                this.players = res.data;
-            })
-            .catch(e => {
-                console.error(e);
-            });
-        }
     },
     mounted: function () {
-        this._getTypeById(this.$route.params["tid"]);
-        this._getPlayerByTypeId(this.$route.params["tid"]);
+        this.getTypeWithPlayers();
         this.siteUrl = process.env.VUE_APP_URL;
     },
 }
