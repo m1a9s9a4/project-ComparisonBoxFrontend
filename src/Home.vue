@@ -65,6 +65,7 @@
                     </v-col>
                 </v-row>
             </p>
+            <SearchField />
             <div v-for="(playerType, i) in playerTypes" v-bind:key="i">
                 <h2 class="text-center text-bold">{{ playerType.japanese }}</h2>
                 <v-row>
@@ -89,6 +90,7 @@
 import HowToUse from './components/Home/HowToUse';
 import Language from './components/Home/Language';
 import Loading from './components/Common/Loading';
+import SearchField from './components/Common/SearchField';
 import Twitter from './components/Share/Twitter';
 import axios from 'axios';
 
@@ -98,6 +100,7 @@ export default {
         Loading,
         Twitter,
         HowToUse,
+        SearchField,
     },
     data () {
         return {
